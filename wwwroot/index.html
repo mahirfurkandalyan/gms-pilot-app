@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GMS Pilot — Demo Uygulama</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    NAVBAR — pilot senaryosunun değişiklik noktası.
+
+    Jira görevi buraya yeni bir sekme eklemeyi istiyor. Değişikliğin gözle görülür
+    olması bilinçli: dağıtımdan sonra siteyi açıp sekmenin gelip gelmediğine bakmak,
+    "kurulum başarılı" yazısına inanmaktan daha güvenilir bir doğrulamadır.
+  -->
+  <header class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo">C</span>
+      <span>Centra Pilot</span>
+    </div>
+    <nav class="nav__tabs">
+      <a class="nav__tab nav__tab--active" href="#anasayfa">Ana Sayfa</a>
+      <a class="nav__tab" href="#urunler">Ürünler</a>
+      <a class="nav__tab" href="#ekip">Ekip</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="hero__kicker">GMS Pilot Denemesi</p>
+      <h1 class="hero__title">Uçtan uca dağıtım senaryosu</h1>
+      <p class="hero__text">
+        Bu sayfa GMS'in gerçekten çalışıp çalışmadığını sınamak için var.
+        Değişiklik talebi açılır, GitHub'da dal ve PR oluşur, birleştirilir,
+        sürüm planlanır ve dağıtım ajanı bu dosyaları sunucuya kurar.
+      </p>
+    </section>
+
+    <section class="cards">
+      <article class="card">
+        <h2>Sürüm</h2>
+        <p class="card__big" id="surum">yükleniyor…</p>
+        <p class="card__sub">
+          Dağıtımdan sonra bu numaranın değişmesi gerekir. Değişmiyorsa kurulum
+          eski dosyaları bırakmış demektir.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Durum</h2>
+        <p class="card__big" id="durum">yükleniyor…</p>
+        <p class="card__sub">Sağlık kontrolü ucundan (<code>/health</code>) okunuyor.</p>
+      </article>
+
+      <article class="card">
+        <h2>Sunucu saati</h2>
+        <p class="card__big" id="saat">yükleniyor…</p>
+        <p class="card__sub">Sayfanın canlı sunucudan geldiğinin kanıtı.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Centra Yazılım · GMS pilot uygulaması
+  </footer>
+
+  <script>
+    // Sağlık ucundan okuyoruz: sürüm bilgisini sayfaya gömmek, dağıtım sonrası
+    // eski dosya kaldığında bunu GİZLERDİ. Tek doğru kaynak çalışan uygulamadır.
+    fetch('health')
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (d) {
+        document.getElementById('surum').textContent = d.version;
+        document.getElementById('durum').textContent = d.status;
+        document.getElementById('saat').textContent =
+          new Date(d.timestamp).toLocaleString('tr-TR');
+      })
+      .catch(function (e) {
+        // Hata sessizce yutulmuyor: sayfa açılıp kutular boş kalırsa kimse sebebini bilemez.
+        ['surum', 'durum', 'saat'].forEach(function (id) {
+          document.getElementById(id).textContent = 'okunamadı';
+        });
+        document.getElementById('durum').title = String(e);
+      });
+  </script>
+
+</body>
+</html>

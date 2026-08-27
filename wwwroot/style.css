@@ -1,0 +1,136 @@
+:root {
+  --deep: #10293e;
+  --sky: #2f8fc9;
+  --ink: #15191d;
+  --ink-2: #59636d;
+  --ink-3: #8a939b;
+  --rule: #e0e6ea;
+  --surface: #ffffff;
+  --ground: #f4f7f9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background: var(--ground);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ---------- Navbar ---------- */
+.nav {
+  background: var(--deep);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 62px;
+  flex-wrap: wrap;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.nav__logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--sky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.nav__tabs { display: flex; gap: 4px; }
+
+.nav__tab {
+  color: rgba(255, 255, 255, .72);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  /* Alt çizgi şeffaf duruyor: etkin sekme eklenince satır yüksekliği zıplamasın. */
+  border-bottom: 2px solid transparent;
+}
+
+.nav__tab:hover { color: #fff; background: rgba(255, 255, 255, .08); }
+
+.nav__tab--active {
+  color: #fff;
+  border-bottom-color: var(--sky);
+}
+
+/* ---------- İçerik ---------- */
+.wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 60px; }
+
+.hero { margin-bottom: 32px; }
+
+.hero__kicker {
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.hero__title { font-size: 30px; margin: 0 0 10px; letter-spacing: -.01em; }
+
+.hero__text { color: var(--ink-2); max-width: 62ch; margin: 0; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.card h2 {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.card__big {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.card__sub { font-size: 12.5px; color: var(--ink-3); margin: 0; line-height: 1.5; }
+
+code {
+  background: var(--ground);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 12px;
+}
+
+.foot {
+  border-top: 1px solid var(--rule);
+  padding: 18px 24px;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 13px;
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!--
+      Sürüm numarası her değişiklikte elle yükseltilir. Amacı süslemek değil:
+      dağıtımdan sonra ekrandaki numaraya bakıp DOSYALARIN GERÇEKTEN DEĞİŞTİĞİNİ
+      doğruluyoruz. Numara eskiyse kurulum çalışmış gibi görünüp aslında eski
+      dosyaları bırakmış demektir — sessizce yanlış olan tam da bu durumdur.
+    -->
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+</Project>
