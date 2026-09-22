@@ -61,6 +61,18 @@
         <p class="card__sub">Sayfanın canlı sunucudan geldiğinin kanıtı.</p>
       </article>
     </section>
+
+    <!--
+      MESAJLAR — veritabanı pilotunun görünür kanıtı. Liste doluysa SQL betiği bu ortamın
+      veritabanında koşmuş demektir; "tablo yok" yazıyorsa koşmamıştır. Hangi veritabanı
+      olduğu da yazılır: TEST'te PilotApp_Test, PROD'da PilotApp_Prod görülmeli.
+    -->
+    <section class="cards">
+      <article class="card card--wide">
+        <h2>Mesajlar <small id="mesaj-db" class="card__sub"></small></h2>
+        <ul id="mesajlar" class="msgs"><li>yükleniyor…</li></ul>
+      </article>
+    </section>
   </main>
 
   <footer class="foot">
@@ -88,6 +100,25 @@
         });
         document.getElementById('durum').title = String(e);
       });
+
+    fetch('api/messages')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var ul = document.getElementById('mesajlar');
+        document.getElementById('mesaj-db').textContent =
+          (d.environment ? d.environment + ' · ' : '') + (d.database || '');
+        ul.innerHTML = '';
+        if (d.error) { var li = document.createElement('li'); li.className = 'msgs__err'; li.textContent = d.error; ul.appendChild(li); return; }
+        if (!d.messages.length) { ul.innerHTML = '<li>Henüz mesaj yok.</li>'; return; }
+        d.messages.forEach(function (m) {
+          var li = document.createElement('li');
+          li.innerHTML = '<strong></strong> <span></span>';
+          li.querySelector('strong').textContent = m.title;
+          li.querySelector('span').textContent = m.body;
+          ul.appendChild(li);
+        });
+      })
+      .catch(function (e) { document.getElementById('mesajlar').innerHTML = '<li class="msgs__err">okunamadı: ' + e + '</li>'; });
   </script>
 
 </body>
