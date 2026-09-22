@@ -134,3 +134,10 @@ code {
   color: var(--ink-3);
   font-size: 13px;
 }
+
+/* Mesajlar (DB pilotu) */
+.card--wide { grid-column: 1 / -1; }
+.msgs { list-style: none; margin: 8px 0 0; padding: 0; }
+.msgs li { padding: 8px 0; border-top: 1px solid #e5e7eb; }
+.msgs li:first-child { border-top: 0; }
+.msgs__err { color: #b91c1c; }
