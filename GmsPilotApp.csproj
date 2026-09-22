@@ -11,7 +11,11 @@
       doğruluyoruz. Numara eskiyse kurulum çalışmış gibi görünüp aslında eski
       dosyaları bırakmış demektir — sessizce yanlış olan tam da bu durumdur.
     -->
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.0" />
+  </ItemGroup>
 
 </Project>
